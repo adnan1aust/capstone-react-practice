@@ -3,6 +3,7 @@ import {
   createAuthUserWithEmailAndPassword,
   createUserDocument,
 } from "../../utils/firebase/firebase";
+import FormInput from "../FormInput/FormInput";
 
 const SignUpForm = () => {
   const [formData, setFormData] = useState({
@@ -43,32 +44,32 @@ const SignUpForm = () => {
     <div>
       <h1>SIgn in using your email and password</h1>
       <form onSubmit={handleSubmit}>
-        <label>Display Name</label>
-        <input
+        <FormInput
+          label="Display Name"
           type="text"
           required
           value={displayName}
           onChange={onchangeHandler}
           name="displayName"
         />
-        <label>Email</label>
-        <input
+        <FormInput
+          label="Email"
           type="email"
           required
           value={email}
           onChange={onchangeHandler}
           name="email"
         />
-        <label>Password</label>
-        <input
+        <FormInput
+          label="Password"
           type="password"
           required
           value={password}
           onChange={onchangeHandler}
           name="password"
         />
-        <label>Confirm Password</label>
-        <input
+        <FormInput
+          label="Confirm Password"
           type="password"
           required
           value={confirmPassword}
