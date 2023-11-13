@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   createUserDocument,
   signInWithGooglePopup,
@@ -7,6 +7,7 @@ import {
 import FormInput from "../FormInput/FormInput";
 import "./Signin.scss";
 import Button from "../Button/Button";
+import { UserContext } from "../../contexts/user";
 
 const SignInForm = () => {
   const [formData, setFormData] = useState({
@@ -14,9 +15,12 @@ const SignInForm = () => {
     password: "",
   });
 
+  const { setUser } = useContext(UserContext);
+
   const logGoogleUser = async () => {
     const response = await signInWithGooglePopup();
     await createUserDocument(response.user, {});
+    setUser(response.user);
   };
 
   const handleSubmit = async (event) => {
@@ -26,7 +30,7 @@ const SignInForm = () => {
         email,
         password
       );
-      console.log(response);
+      setUser(response.user);
     } catch (error) {
       console.log(error);
       if (error.code === "auth/wrong-password") {
