@@ -4,13 +4,14 @@ import Logo from "../../assets/crown.svg";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/user";
 import { signOutUser } from "../../utils/firebase/firebase";
+import CartIcon from "../../components/CartIcon/CartIcon";
+import CartDropDown from "../../components/CartDropdown/CartDropdown";
 
 const Navigation = () => {
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   const signOutHandler = async () => {
     await signOutUser();
-    setUser(null);
   };
   return (
     <>
@@ -31,7 +32,9 @@ const Navigation = () => {
               Sign In
             </Link>
           )}
+          <CartIcon />
         </div>
+        <CartDropDown />
       </div>
       <Outlet />
     </>
