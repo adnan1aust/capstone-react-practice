@@ -3,16 +3,19 @@ import "./Navigation.scss";
 import Logo from "../../assets/crown.svg";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/user";
+import { CartContext } from "../../contexts/cart";
 import { signOutUser } from "../../utils/firebase/firebase";
 import CartIcon from "../../components/CartIcon/CartIcon";
 import CartDropDown from "../../components/CartDropdown/CartDropdown";
 
 const Navigation = () => {
   const { user } = useContext(UserContext);
+  const { isCartDropdownVisible } = useContext(CartContext);
 
   const signOutHandler = async () => {
     await signOutUser();
   };
+
   return (
     <>
       <div className="navigation">
@@ -34,7 +37,7 @@ const Navigation = () => {
           )}
           <CartIcon />
         </div>
-        <CartDropDown />
+        {isCartDropdownVisible ? <CartDropDown /> : null}
       </div>
       <Outlet />
     </>
